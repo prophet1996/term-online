@@ -14,7 +14,7 @@
     "tslib": "^2.0.0",
     "autoprefixer": "^10.2.6",
     "postcss": "^8.3.2",
-    "@sveltejs/vite-plugin-svelte": "^1.0.0-next.10"
+    "@sveltejs/vite-plugin-svelte": "^1.0.0-next.11"
   },
   "name": "term-online",
   "version": "1.0.0",
