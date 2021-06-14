@@ -5,32 +5,46 @@
   let prompt = `${username} :`;
   let terminalRef: HTMLTextAreaElement;
   let cmdLets = [{ value: "" }];
-
+  let fontSize = 16;
+  let heights = [];
   onMount(() => {
     terminalRef.style.height = "24px";
     terminalRef.focus();
+    try {
+      fontSize = parseInt(window.getComputedStyle(terminalRef).fontSize);
+    } catch (e) {
+      console.error("cannot get the font size of terminal");
+    }
   });
   const handlePageClick = () => {
     terminalRef.focus();
   };
 
+  const getComputedTextAreaHeight = (ref, idx) => {
+    if (ref) {
+      return (
+        Math.min(
+          Math.ceil((ref.value.length * 0.6 * fontSize) / ref.offsetWidth),
+          20
+        ) * 24
+      );
+    } else {
+      return heights[idx];
+    }
+  };
   const autoTerminalInputResize = () => {
-    const row = Math.min(
-      Math.ceil(
-        (terminalRef.value.length * 0.6 * 16) / terminalRef.offsetWidth
-      ),
-      20
-    );
-    console.log(row);
-    terminalRef.style.height = `${row * 24}px`;
+    const textAreaHeight = getComputedTextAreaHeight(terminalRef,null);
+    terminalRef.style.height = `${textAreaHeight}px`;
   };
 
   const handleCmdKeyDown = async (event) => {
     if (event.code === "Enter") {
       event.preventDefault();
       cmdLets = [...cmdLets, { value: "" }];
+      heights.push(terminalRef.offsetHeight);
       await tick();
       terminalRef.focus();
+      autoTerminalInputResize();
     }
   };
 </script>
@@ -57,6 +71,7 @@
       {:else}
         <textarea
           disabled={true}
+          style={`height:${getComputedTextAreaHeight(null,idx)}px`}
           bind:value={cmd.value}
           class="flex-1 w-full bg-denim-500 dark:bg-denim-800 border-none focus:outline-none resize-none"
         />
