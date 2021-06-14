@@ -11,7 +11,10 @@
     "tailwindcss": "^2.1.4",
     "typescript": "^4.0.0",
     "vite": "^2.3.7",
-    "tslib": "^2.0.0"
+    "tslib": "^2.0.0",
+    "autoprefixer": "^10.2.6",
+    "postcss": "^8.3.2",
+    "@sveltejs/vite-plugin-svelte": "^1.0.0-next.10"
   },
   "name": "term-online",
   "version": "1.0.0",
@@ -29,10 +32,5 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "description": "",
-  "dependencies": {
-    "autoprefixer": "^10.2.6",
-    "postcss": "^8.3.2",
-    "@sveltejs/vite-plugin-svelte": "^1.0.0-next.10"
-  }
+  "description": ""
 }
